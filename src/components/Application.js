@@ -32,13 +32,13 @@ export default function Application(props) {
       [id]: appointment
     };
 
-    axios.put(`/api/appointments/${id}`, { interview })
-      .then(
+    return axios.put(`/api/appointments/${id}`, { interview })
+      .then((res) => {
         setState({
           ...state,
           appointments
         })
-      )
+      })
   };
   // effect to make get request using axios and update days state
   useEffect(() => {
