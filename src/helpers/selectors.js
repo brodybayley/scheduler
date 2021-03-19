@@ -19,3 +19,11 @@ export function getInterview(state, interview) {
     }
   )
 }
+
+export function getInterviewersForDay(state, day) {
+  const filteredDays = state.days.find(actualDay => actualDay.name === day);
+  if (!filteredDays) {
+    return [];
+  }
+  return filteredDays.interviewers.map(aptID => state.interviewers[aptID]);
+}
