@@ -15,12 +15,31 @@ export default function Application(props) {
     interviewers: {}
   });
 
+
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const dailyInterviewers = getInterviewersForDay(state, state.day);
 
   const setDay = day => setState({ ...state, day });
-  // const setDays = days => setState(prev => ({ ...prev, days }));
 
+  const bookInterview = function (id, interview) {
+    console.log(id, interview);
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    axios.put(`/api/appointments/${id}`, { interview })
+      .then(
+        setState({
+          ...state,
+          appointments
+        })
+      )
+  };
   // effect to make get request using axios and update days state
   useEffect(() => {
     Promise.all([
@@ -71,6 +90,7 @@ export default function Application(props) {
                 time={appointment.time}
                 interview={interview}
                 interviewers={dailyInterviewers}
+                bookInterview={bookInterview}
               />
             );
           })
