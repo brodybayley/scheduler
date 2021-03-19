@@ -40,6 +40,7 @@ export default function Application(props) {
       })
   };
 
+
   const cancelInterview = function (id) {
     const appointment = {
       ...state.appointments[id],
@@ -57,7 +58,9 @@ export default function Application(props) {
           appointments
         })
       })
-  }
+  };
+
+
   // effect to make get request using axios and update days state
   useEffect(() => {
     Promise.all([
