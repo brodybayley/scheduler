@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from 'axios';
 
 export default function useApplicationData() {
@@ -13,6 +13,18 @@ export default function useApplicationData() {
   const setDay = day => setState({ ...state, day });
 
 
+  const availableSpots = (val) => {
+    const dayDisplayed = state.days.find(day => day.name === state.day);
+    const dayClone = [...state.days];
+
+    dayClone.forEach(day => {
+      if (day.id === dayDisplayed.id) day.spots += val
+    });
+
+    return dayClone;
+  };
+
+
   const bookInterview = (id, interview) => {
     const appointment = {
       ...state.appointments[id],
@@ -22,12 +34,13 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
+    availableSpots(-1);
 
     return axios.put(`/api/appointments/${id}`, { interview })
       .then((res) => {
         setState({
           ...state,
-          appointments
+          appointments,
         })
       })
   };
@@ -42,12 +55,13 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
+    availableSpots(1);
 
     return axios.delete(`/api/appointments/${id}`)
       .then((res) => {
         setState({
           ...state,
-          appointments
+          appointments,
         })
       })
   };
@@ -65,7 +79,7 @@ export default function useApplicationData() {
           ...res,
           days: all[0].data,
           appointments: all[1].data,
-          interviewers: all[2].data
+          interviewers: all[2].data,
         }));
       });
   }, [])
