@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, cleanup, waitForElement, fireEvent, getByText, prettyDOM, getAllByTestId, getByAltText, getByPlaceholderText } from "@testing-library/react";
+import { render, cleanup, waitForElement, fireEvent, getByText, getAllByTestId, getByAltText, getByPlaceholderText, queryByText } from "@testing-library/react";
 
 import Application from "components/Application";
 
@@ -25,7 +25,7 @@ describe("Application", () => {
     const appointments = getAllByTestId(container, "appointment");
     const appointment = appointments[0];
     // used to start an empty appointment
-    fireEvent.click(getByAltText(appointment, "Add"))
+    fireEvent.click(getByAltText(appointment, "Add"));
     // event to input user information
     fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
       target: { value: "Lydia Miller-Jones" }
@@ -35,7 +35,15 @@ describe("Application", () => {
     //event to save appointment
     fireEvent.click(getByText(appointment, "Save"));
 
-    console.log(prettyDOM(appointment));
+    expect(getByText(appointment, "Saving")).toBeInTheDocument();
+
+    await waitForElement(() => queryByText(appointment, "Lydia Miller-Jones"));
+
+    const day = getAllByTestId(container, "day").find(day =>
+      queryByText(day, "Monday")
+    );
+
+    expect(getByText(day, "no spots remaining")).toBeInTheDocument();
   });
 
 });
