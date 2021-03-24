@@ -76,7 +76,7 @@ export default function Appointment(props) {
       )}
       { mode === DELETING && (
         <Status
-          message={'Delete the appointment?'}
+          message={'Deleting'}
         />
       )}
       { mode === CONFIRM && (
