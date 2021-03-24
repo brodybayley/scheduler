@@ -142,10 +142,10 @@ describe("Application", () => {
     //7. Display error message
     await waitForElement(() => queryByText(appointment, "Could not save"));
     //8. Event to close error box
-    await waitForElement(() => getByAltText(appointment, "Close"));
+    fireEvent.click(getByAltText(appointment, "Close"));
     //9. Display form after closing error box
     expect(getByPlaceholderText(appointment, /enter student name/i)).toBeInTheDocument();
-  })
+  });
 
 
   it("Shows the delete error when failing to delete an existing appointment", async () => {
@@ -178,8 +178,8 @@ describe("Application", () => {
     await waitForElement(() => queryByText(appointment, "Could not delete appointment"));
 
     //8. Event to close error box
-    await waitForElement(() => getByAltText(appointment, "Close"));
+    fireEvent.click(getByAltText(appointment, "Close"));
 
-    expect(getByText("Archie Cohen")).toBeInTheDocument();
-  })
+    expect(queryByText(appointment, "Archie Cohen")).toBeInTheDocument();
+  });
 });
