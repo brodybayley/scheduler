@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 import { render, cleanup, waitForElement, fireEvent, getByText, getAllByTestId, getByAltText, getByPlaceholderText, queryByText, queryByAltText } from "@testing-library/react";
 
@@ -16,6 +17,7 @@ describe("Application", () => {
       expect(getByText("Leopold Silvers")).toBeInTheDocument();
     });
   });
+
 
   it("loads data, books an interview and reduces the spots remaining for the first day by 1", async () => {
     const { container } = render(<Application />);
@@ -45,6 +47,7 @@ describe("Application", () => {
     //check that the DayListItem with the text "Monday" also has the txt "no spots remaining"
     expect(getByText(day, "no spots remaining")).toBeInTheDocument();
   });
+
 
   it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
     // 1. Render the Application.
@@ -78,9 +81,10 @@ describe("Application", () => {
     const day = getAllByTestId(container, "day").find(day =>
       queryByText(day, "Monday")
     );
-    //needs to be "2 spots remaining"
-    expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
+
+    expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
   });
+
 
   it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
     // 1. Render the Application.
@@ -115,4 +119,8 @@ describe("Application", () => {
     expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
   })
 
+
+  it("Shows the save error when failing to save an appointment", () => {
+    axios.put.mockRejectedValueOnce();
+  });
 });
