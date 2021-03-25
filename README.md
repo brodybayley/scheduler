@@ -7,23 +7,22 @@ Interview scheduler is a single page react application that gives users the abil
 ## Getting Started
 
 1. Install dependencies with `npm install`.
-2. Start the web server using the 'npm run local' command. The app will be served at http://localhost:8080/.
-3. Once the server shows Example app listening on port 8080! go to http://localhost:8080/ in your browser.
+2. Start the web server using the 'npm run local' command. The app will be served at http://localhost:8000/.
+3. Once the server shows 'You can now view scheduler in the browser' go to http://localhost:8000/ in your browser.
 
-## Running Webpack Development Server
+## Dependencies
 
-```sh
-npm start
-```
+- Axios
+- Classnames
+- React
+- React-dom
+- React-scripts
+- React-test-renderer
+- Node-sass
+- @testing-library/react-hooks
 
-## Running Jest Test Framework
+## Using Application
 
-```sh
-npm test
-```
-
-## Running Storybook Visual Testbed
-
-```sh
-npm run storybook
-```
+- Click on the plus sign to book an interview.
+- Enter a name, select an interviewer and press the save button.
+- If you want to edit or delete an interview, hover over the interview and press the edit or delete icon in the bottom right-hand corner of the interview container.
