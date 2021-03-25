@@ -1,4 +1,8 @@
-import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
+import {
+  getAppointmentsForDay,
+  getInterview,
+  getInterviewersForDay,
+} from "helpers/selectors";
 
 const state = {
   days: [
@@ -7,114 +11,107 @@ const state = {
       name: "Monday",
       appointments: [1, 2, 3],
       interviewers: [2, 3, 5, 6],
-      spots: 2
+      spots: 2,
     },
     {
       id: 2,
       name: "Tuesday",
       appointments: [4, 5],
       interviewers: [3, 5, 7],
-      spots: [3]
+      spots: [3],
     },
-    // {
-    //   id: 3,
-    //   name: "Wednesday",
-    //   appointments: [5, 6],
-    //   interviewers: [1, 5, 7],
-    //   spots: [3]
-    // },
     {
       id: 4,
       name: "Thursday",
       appointments: [7, 8],
       interviewers: [3, 5, 7],
-      spots: [4]
+      spots: [4],
     },
     {
       id: 5,
       name: "Friday",
       appointments: [9, 10],
       interviewers: [2, 3, 7],
-      spots: [3]
-    }
+      spots: [3],
+    },
   ],
   appointments: {
-    "1": { id: 1, time: "12pm", interview: null },
-    "2": { id: 2, time: "1pm", interview: null },
-    "3": {
+    1: { id: 1, time: "12pm", interview: null },
+    2: { id: 2, time: "1pm", interview: null },
+    3: {
       id: 3,
       time: "2pm",
-      interview: { student: "Archie Cohen", interviewer: 2 }
+      interview: { student: "Archie Cohen", interviewer: 2 },
     },
-    "4": { id: 4, time: "3pm", interview: null },
-    "5": {
+    4: { id: 4, time: "3pm", interview: null },
+    5: {
       id: 5,
       time: "4pm",
-      interview: { student: "Chad Takahashi", interviewer: 2 }
+      interview: { student: "Chad Takahashi", interviewer: 2 },
     },
-    "6": {
+    6: {
       id: 6,
       time: "12pm",
-      interview: { student: "Brody Takahashi", interviewer: 4 }
+      interview: { student: "Brody Takahashi", interviewer: 4 },
     },
-    "7": {
+    7: {
       id: 7,
       time: "11am",
-      interview: { student: "Shaun hashi", interviewer: 1 }
+      interview: { student: "Shaun hashi", interviewer: 1 },
     },
-    "8": {
+    8: {
       id: 8,
       time: "10am",
-      interview: { student: "Larry Taka", interviewer: 6 }
+      interview: { student: "Larry Taka", interviewer: 6 },
     },
-    "9": {
+    9: {
       id: 9,
       time: "3pm",
-      interview: { student: "Tamara Takshi", interviewer: 3 }
+      interview: { student: "Tamara Takshi", interviewer: 3 },
     },
-    "10": {
+    10: {
       id: 10,
       time: "2pm",
-      interview: { student: "Melanie Takahi", interviewer: 6 }
-    }
+      interview: { student: "Melanie Takahi", interviewer: 6 },
+    },
   },
   interviewers: {
-    "1": {
-      "id": 1,
-      "name": "Sylvia Palmer",
-      "avatar": "https://i.imgur.com/LpaY82x.png"
+    1: {
+      id: 1,
+      name: "Sylvia Palmer",
+      avatar: "https://i.imgur.com/LpaY82x.png",
     },
-    "2": {
+    2: {
       id: 2,
       name: "Tori Malcolm",
-      avatar: "https://i.imgur.com/Nmx0Qxo.png"
+      avatar: "https://i.imgur.com/Nmx0Qxo.png",
     },
-    "3": {
+    3: {
       id: 3,
       name: "Brody Malcolm",
-      avatar: "https://i.imgur.com/Nmx0Qxo.png"
+      avatar: "https://i.imgur.com/Nmx0Qxo.png",
     },
-    "4": {
+    4: {
       id: 4,
       name: "Shaun Robinson",
-      avatar: "https://i.imgur.com/Nmx0Qxo.png"
+      avatar: "https://i.imgur.com/Nmx0Qxo.png",
     },
-    "5": {
+    5: {
       id: 5,
       name: "Brent Bradley",
-      avatar: "https://i.imgur.com/Nmx0Qxo.png"
+      avatar: "https://i.imgur.com/Nmx0Qxo.png",
     },
-    "6": {
+    6: {
       id: 6,
       name: "Jackie Wynsouw",
-      avatar: "https://i.imgur.com/Nmx0Qxo.png"
+      avatar: "https://i.imgur.com/Nmx0Qxo.png",
     },
-    "7": {
+    7: {
       id: 7,
       name: "Melanie Brunac",
-      avatar: "https://i.imgur.com/Nmx0Qxo.png"
-    }
-  }
+      avatar: "https://i.imgur.com/Nmx0Qxo.png",
+    },
+  },
 };
 
 test("getAppointmentsForDay returns an array", () => {
@@ -143,7 +140,6 @@ test("getAppointmentsForDay returns an empty array when the day is not found", (
   expect(result.length).toEqual(0);
 });
 
-
 test("getInterview returns an object with the interviewer data", () => {
   const result = getInterview(state, state.appointments["3"].interview);
   expect(result).toEqual(
@@ -152,8 +148,8 @@ test("getInterview returns an object with the interviewer data", () => {
       interviewer: expect.objectContaining({
         id: expect.any(Number),
         name: expect.any(String),
-        avatar: expect.any(String)
-      })
+        avatar: expect.any(String),
+      }),
     })
   );
 });

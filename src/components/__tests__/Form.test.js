@@ -10,9 +10,9 @@ describe("Form", () => {
   const interviewers = [
     {
       id: 1,
-      name: "Syliva Palmer",
-      avatar: "https://i.imgur.com/LpaY82x.png"
-    }
+      name: "Sylvia Palmer",
+      avatar: "https://i.imgur.com/LpaY82x.png",
+    },
   ];
 
   it("renders without student name if not provided", () => {
@@ -45,9 +45,13 @@ describe("Form", () => {
 
   it("can successfully save after trying to submit an empty student name", () => {
     const onSave = jest.fn();
-    const { getByText, getByPlaceholderText, queryByText } = render(
-      <Form interviewers={interviewers} onSave={onSave} />
-    );
+    const {
+      getByAltText,
+      getByText,
+      getByPlaceholderText,
+      queryByText,
+      debug,
+    } = render(<Form interviewers={interviewers} onSave={onSave} />);
 
     fireEvent.click(getByText("Save"));
 
@@ -55,15 +59,18 @@ describe("Form", () => {
     expect(onSave).not.toHaveBeenCalled();
 
     fireEvent.change(getByPlaceholderText("Enter Student Name"), {
-      target: { value: "Lydia Miller-Jones" }
+      target: { value: "Lydia Miller-Jones" },
     });
+
+    fireEvent.click(getByAltText("Sylvia Palmer"));
 
     fireEvent.click(getByText("Save"));
 
     expect(queryByText(/student name cannot be blank/i)).toBeNull();
 
     expect(onSave).toHaveBeenCalledTimes(1);
-    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", null);
+    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", 1);
+    debug();
   });
 
   it("calls onCancel and resets the input field", () => {
@@ -80,7 +87,7 @@ describe("Form", () => {
     fireEvent.click(getByText("Save"));
 
     fireEvent.change(getByPlaceholderText("Enter Student Name"), {
-      target: { value: "Lydia Miller-Jonest" }
+      target: { value: "Lydia Miller-Jonest" },
     });
 
     fireEvent.click(getByText("Cancel"));
