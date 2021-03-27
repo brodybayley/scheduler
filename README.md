@@ -4,11 +4,11 @@ Interview scheduler is a single page react application that gives users the abil
 
 # Final Product
 
-!["Screenshot of main page"](https://github.com/brodybayley/tweeter/blob/master/docs/urls-webpage.png)
+!["Screenshot of main page"](https://github.com/brodybayley/scheduler/blob/master/docs/main-page.png)
 
-!["Screenshot of booking form"](https://github.com/brodybayley/tweeter/blob/master/docs/urls-tablet.png)
+!["Screenshot of booking form"](https://github.com/brodybayley/scheduler/blob/master/docs/input-form.png)
 
-!["Screenshot of delete confirmation"](https://github.com/brodybayley/tweeter/blob/master/docs/urls-mobile.png)
+!["Screenshot of delete confirmation"](https://github.com/brodybayley/scheduler/blob/master/docs/delete-confirmation.png)
 
 ## Getting Started
 
