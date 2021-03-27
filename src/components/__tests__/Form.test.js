@@ -70,7 +70,6 @@ describe("Form", () => {
 
     expect(onSave).toHaveBeenCalledTimes(1);
     expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", 1);
-    debug();
   });
 
   it("calls onCancel and resets the input field", () => {
